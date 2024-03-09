@@ -1,18 +1,25 @@
-import No from "./No.js";
+/*
+    QUESTÃO 3: Implemente uma lista simples utilizando um array de nós (nodes) para guardar as 
+    informações.
+*/ 
+import No from "../../No.js";
 class Lista {
     constructor(){
+        this.dados = [];
         this.head = new No();
+        this.dados[0] = this.head;
         this.size = 0;
     }
     add(dado){
         let novo = new No(dado);
-        let x = this.head.proximo;
         this.head.proximo = novo;
-        novo.proximo = x;
+        novo.proximo = null;
         this.size++;
+        this.arrayListAdd(novo, this.size);
     }
     addAt(posicao, dado){
         if(posicao < this.size){
+            this.size++;
             let x = 1;
             let novo = new No(dado);
             let aux = this.head;
@@ -20,11 +27,18 @@ class Lista {
                 x++;
                 aux = aux.proximo;
             }
+            this.arrayListAdd(novo, posicao);
             novo.proximo = aux.proximo;
             aux.proximo = novo;
             return;
         }
         return "Posição maior que a lista!";
+    }
+    arrayListAdd(node, posicao){
+        this.dados[posicao] = node;
+    }
+    arrayListRemove(posicao){
+        this.dados.splice(posicao);
     }
     append(dado){    
         this.size++;
@@ -34,6 +48,7 @@ class Lista {
         }
         let no = new No(dado);
         x.proximo = no;
+        this.arrayListAdd(no, this.size);
         no.proximo = null;
     }
     search(data){
@@ -51,6 +66,7 @@ class Lista {
     removeAt(posicao){
         if(!this.isEmpty()){
             if(posicao < this.size){
+                this.arrayListRemove(posicao);
                 this.size--;
                 let x = 1;
                 let aux = this.head.proximo;
@@ -69,6 +85,7 @@ class Lista {
 
     removeLast(){
         if(!this.isEmpty()){
+            this.arrayListRemove(this.size);
             this.size--;
             let x = this.head.proximo;
             while(x.proximo!=null){
@@ -81,6 +98,8 @@ class Lista {
     }
     removeFirst(){
         if(!this.isEmpty()){
+            this.arrayListRemove(1);
+            console.log(this.dados);
             this.size--;
             let x = this.head.proximo; 
             if(x.proximo != null){
