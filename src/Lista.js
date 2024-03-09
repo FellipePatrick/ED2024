@@ -74,7 +74,7 @@ class Lista {
                 x = x.proximo;
             }
             x.proximo = null;
-            return;
+            return x.dado;
         }   
         return "Lista vazia";
     }
@@ -87,7 +87,7 @@ class Lista {
                 return;
             }
             this.head.proximo == null;
-            return;
+            return this.head.proximo.dado;
         }
         return "Lista vazia";
     }
