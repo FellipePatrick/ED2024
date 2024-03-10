@@ -26,7 +26,6 @@ const rpn = (expressao) => {
     }
     return exFinal;
 }
-
 const reorganiza = (p) => {
     let aux = new Pilha(p.size());
     let aux2 = new Pilha(p.size());
